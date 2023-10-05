@@ -8,6 +8,7 @@ class Main {
         // Your code here
         Scanner scanner = new Scanner(System.in);
         int T = scanner.nextInt();
+        System.gc();
         for(int a = 1; a <= T; a++){
             int m = scanner.nextInt();
             int n = scanner.nextInt();
