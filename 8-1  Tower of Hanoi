@@ -1,0 +1,23 @@
+import java.io.*; // for handling input/output
+import java.util.*; // contains Collections framework
+
+// don't change the name of this class
+// you can add inner classes if needed
+class Main {
+    public static void main (String[] args) {
+        // Your code here
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        moveDisks(N, 'A', 'C', 'B');
+    }
+
+    public static void moveDisks(int N, char from, char to, char auxiliary) {
+        if (N == 1) {
+            System.out.println(N +":" + from +"->"+ to);
+        } else {
+            moveDisks(N - 1, from, auxiliary, to);
+            System.out.println(N +":" + from +"->"+ to);
+            moveDisks(N - 1, auxiliary, to, from);
+        }
+    }
+}
