@@ -1,0 +1,45 @@
+import java.io.*; // for handling input/output
+import java.util.*; // contains Collections framework
+
+// don't change the name of this class
+// you can add inner classes if needed
+
+
+ class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        long K = scanner.nextLong();
+        long[] numbers = new long[N];
+        
+        for (int i = 0; i < N; i++) {
+            numbers[i] = scanner.nextLong();
+        }
+
+        if (isPossibleToAchieveSum(numbers, K, 0, 0)) {
+            System.out.println("YES");
+        } else {
+            System.out.println("NO");
+        }
+    }
+
+    private static boolean isPossibleToAchieveSum(long[] numbers, long targetSum, int currentIndex, long currentSum) {
+        if (currentIndex == numbers.length) {
+            return currentSum == targetSum;
+        }
+
+        long currentNumber = numbers[currentIndex];
+
+        // Try adding the current number
+        if (isPossibleToAchieveSum(numbers, targetSum, currentIndex + 1, currentSum + currentNumber)) {
+            return true;
+        }
+
+        // Try subtracting the current number
+        if (isPossibleToAchieveSum(numbers, targetSum, currentIndex + 1, currentSum - currentNumber)) {
+            return true;
+        }
+
+        return false;
+    }
+}
