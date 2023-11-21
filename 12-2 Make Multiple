@@ -1,0 +1,47 @@
+import java.io.*; // for handling input/output
+import java.util.*; // contains Collections framework
+
+// don't change the name of this class
+// you can add inner classes if needed
+class Main {
+    public static void main (String[] args) {
+        // Your code here
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+
+        while (t-- > 0) {
+            int A = sc.nextInt();
+            int B = sc.nextInt();
+            
+            
+            boolean possible = isPossibleDivisor(A, B);
+            if (possible) {
+                System.out.println("YES");
+            } else {
+                    System.out.println("NO");
+            }
+            
+        }
+    }
+    public static boolean isPossibleDivisor(int A, int B) {
+        if (B % A == 0) {
+            return true;
+        }
+
+        int difference = B - A;
+        if (A > difference) {
+            return false; 
+        }
+
+        for (int X = 0; X <= difference; X++) {
+            int newA = A + X;
+            int newB = B + X;
+
+            if (newB % newA == 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
