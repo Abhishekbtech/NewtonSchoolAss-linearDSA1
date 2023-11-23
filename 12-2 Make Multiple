@@ -13,35 +13,15 @@ class Main {
             int A = sc.nextInt();
             int B = sc.nextInt();
             
-            
-            boolean possible = isPossibleDivisor(A, B);
-            if (possible) {
+            if (B % A == 0) {
                 System.out.println("YES");
-            } else {
-                    System.out.println("NO");
+            } else if(B - A >= A) {
+                System.out.println("YES");
+            }else{
+                System.out.println("NO");
             }
             
         }
     }
-    public static boolean isPossibleDivisor(int A, int B) {
-        if (B % A == 0) {
-            return true;
-        }
-
-        int difference = B - A;
-        if (A > difference) {
-            return false; 
-        }
-
-        for (int X = 0; X <= difference; X++) {
-            int newA = A + X;
-            int newB = B + X;
-
-            if (newB % newA == 0) {
-                return true;
-            }
-        }
-
-        return false;
-    }
+    
 }
