@@ -1,0 +1,30 @@
+static void printM_SpecialGCD(int N, int M) {
+        // Find the smallest prime factor of N
+        int smallestPrimeFactor = findSmallestPrimeFactor(N);
+        int count = 0;
+        int num = N + smallestPrimeFactor - (N % smallestPrimeFactor);
+        while (count < M) {
+            if (findGCD(N, num) == smallestPrimeFactor) {
+                System.out.print(num + " ");
+                count++;
+            }
+            num += smallestPrimeFactor;
+        }
+    }
+
+    static int findSmallestPrimeFactor(int num) {
+        for (int i = 2; i * i <= num; i++) {
+            if (num % i == 0) {
+                return i;
+            }
+        }
+        return num;
+    }
+
+    static int findGCD(int a, int b) {
+        if (b == 0) {
+            return a;
+        } else {
+            return findGCD(b, a % b);
+        }
+    }
