@@ -1,0 +1,10 @@
+static int firstTwo(int N){
+//Enter your code here
+    String numStr = Integer.toString(N);
+    if (numStr.length() >= 2) {
+        String firstTwoDigitsReversed = new StringBuilder(numStr.substring(0, 2)).reverse().toString();
+        return Integer.parseInt(firstTwoDigitsReversed);
+    } else {
+        return N;
+    }
+}
