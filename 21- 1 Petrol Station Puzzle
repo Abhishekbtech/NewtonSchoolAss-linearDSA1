@@ -1,0 +1,41 @@
+import java.io.*; // for handling input/output
+import java.util.*; // contains Collections framework
+
+// don't change the name of this class
+// you can add inner classes if needed
+class Main {
+    public static void main (String[] args) {
+        // Your code here
+        Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
+        int[] lengths = new int[N];
+        for (int i = 0; i < N; i++) {
+            lengths[i] = scanner.nextInt();
+        }
+        boolean canUnlock = canUnlock(lengths);
+
+        if (canUnlock) {
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+    }
+
+    public static boolean canUnlock(int[] rotations) {
+        int n = rotations.length;
+        for (int mask = 0; mask < (1 << n); mask++) {
+            int sum = 0;
+            for (int i = 0; i < n; i++) {
+                if ((mask & (1 << i)) > 0) {
+                    sum += rotations[i];
+                } else {
+                    sum -= rotations[i];
+                }
+            }
+            if (sum % 360 == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
