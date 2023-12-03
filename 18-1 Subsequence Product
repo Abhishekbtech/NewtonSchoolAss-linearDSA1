@@ -1,0 +1,40 @@
+import java.io.*; // for handling input/output
+import java.util.*; // contains Collections framework
+
+// don't change the name of this class
+// you can add inner classes if needed
+class Main {
+    public static void main (String[] args) {
+        // Your code here
+        Scanner sc = new Scanner(System.in);
+        long mod = 1000000007;
+        int n = sc.nextInt();
+        int arr[] = new int[n];
+        for(int i=0;i<n;i++){
+            arr[i] = sc.nextInt(); 
+        }
+
+        long posCount = 0, negCount = 0;
+        if(arr[0]<0){
+            negCount = 1;
+        }else{
+            posCount = 1;
+        }
+        
+        for(int i=1;i<n;i++){
+            long currPos = 0, currNeg = 0;
+            if(arr[i]<0){
+                currNeg = negCount + posCount + 1; 
+                currPos = posCount + negCount;
+            }else if(arr[i]>0){
+                currNeg = 2*negCount;
+                currPos = (2*posCount) + 1;
+            }else{
+                continue;
+            }
+            negCount = currNeg%mod;
+            posCount = currPos%mod;
+        }
+        System.out.println(posCount);
+    }
+}
