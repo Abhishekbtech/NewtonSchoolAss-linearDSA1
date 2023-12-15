@@ -1,0 +1,36 @@
+class AdderII {
+    private int num1;
+    private int num2;
+
+    public AdderII() {
+        num1 = 0;
+        num2 = 0;
+    }
+
+    public AdderII(int a, int b) {
+        num1 = a;
+        num2 = b;
+    }
+
+    public int add(int a, int b, int c) {
+        num1 += a;
+        num2 += b;
+        return num1 + num2 - 2 * c;
+    }
+
+    public int add() {
+        return num1 + num2;
+    }
+
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    public static void main(String[] args) {
+        AdderII adder = new AdderII();
+        if (adder.add(1, 1) == 2)
+            System.out.println("Correct");
+        else
+            System.out.println("Wrong");
+    }
+}
