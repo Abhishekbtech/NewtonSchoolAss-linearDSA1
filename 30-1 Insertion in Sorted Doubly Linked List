@@ -1,0 +1,23 @@
+static Node sortedInsertion(Node head, Node newNode)
+{
+        // Code
+        Node current = head;
+        Node prev = null;
+        if (head == null || newNode.data <= head.data) {
+            newNode.next = head;
+            head.prev = newNode;
+            head = newNode;
+        } else {
+            while (current != null && newNode.data > current.data) {
+                prev = current;
+                current = current.next;
+            }
+            newNode.prev = prev;
+            newNode.next = current;
+            prev.next = newNode;
+            if (current != null) {
+                current.prev = newNode;
+            }
+        }
+        return head;
+}
