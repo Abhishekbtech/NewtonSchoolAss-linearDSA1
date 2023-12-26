@@ -1,0 +1,21 @@
+public static Node deleteMiddleElement(Node head) {
+	// return the head of the modified Linked List
+        if (head == null || head.next == null) {
+            return new Node(-1);
+        }
+        
+        int size = 0;
+        Node temp = head;
+        while (temp != null) {
+            size++;
+            temp = temp.next;
+        }
+        
+        Node copyHead = head;
+        int mid = size / 2; 
+        while (mid-- > 1) { 
+            head = head.next; 
+        } 
+        head.next = head.next.next; 
+        return copyHead; 
+}
