@@ -1,0 +1,20 @@
+static Node deleteEven(Node head){
+    //Enter your code here
+        Node current = head;
+        Node nextNode;
+
+        while (current.next != head) {
+            nextNode = current.next;
+
+            if (nextNode.data % 2 == 0) {
+                current.next = nextNode.next;
+            } else {
+                current = current.next;
+            }
+        }
+
+        if (head.data % 2 == 0) {
+            head = null;
+        }
+        return current;
+}
