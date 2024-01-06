@@ -1,0 +1,29 @@
+import java.io.*; // for handling input/output
+import java.util.*; // contains Collections framework
+
+// don't change the name of this class
+// you can add inner classes if needed
+class Main {
+    public static void main (String[] args) {
+        // Your code here
+        Scanner scanner = new Scanner(System.in);
+        String N = scanner.next();
+        System.out.println(firstUniqChar(N));
+    }
+
+    public static int firstUniqChar(String s) {
+        Map<Character, Integer> charFrequency = new HashMap<>();
+
+        for (char c : s.toCharArray()) {
+            charFrequency.put(c, charFrequency.getOrDefault(c, 0) + 1);
+        }
+
+        for (int i = 0; i < s.length(); i++) {
+            if (charFrequency.get(s.charAt(i)) == 1) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+}
