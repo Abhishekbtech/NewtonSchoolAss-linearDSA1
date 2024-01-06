@@ -1,0 +1,52 @@
+ import java.io.*; // for handling input/output
+import java.util.*; // contains Collections framework
+
+// don't change the name of this class
+// you can add inner classes if needed
+class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+
+        List<Integer> nums = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            nums.add(scanner.nextInt());
+        }
+
+        List<Integer> result = frequencySort(nums);
+
+        for (int i = 0; i < n; i++) {
+            System.out.print(result.get(i) + " ");
+        }
+    }
+
+    public static List<Integer> frequencySort(List<Integer> nums) {
+        Map<Integer, Integer> frequency = new HashMap<>();
+        for (int num : nums) {
+            frequency.put(num, frequency.getOrDefault(num, 0) + 1);
+        }
+
+        List<int[]> freqPairs = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : frequency.entrySet()) {
+            freqPairs.add(new int[]{entry.getKey(), entry.getValue()});
+        }
+
+        freqPairs.sort((a, b) -> {
+            if (a[1] == b[1]) {
+                return b[0] - a[0];
+            }
+            return a[1] - b[1];
+        });
+
+        List<Integer> result = new ArrayList<>();
+        for (int[] pair : freqPairs) {
+            int value = pair[0];
+            int freq = pair[1];
+            for (int i = 0; i < freq; i++) {
+                result.add(value);
+            }
+        }
+
+        return result;
+    }
+}
