@@ -1,0 +1,45 @@
+import java.io.*; // for handling input/output
+import java.util.*; // contains Collections framework
+
+// don't change the name of this class
+// you can add inner classes if needed
+class Main {
+    public static void main (String[] args) {
+        // Your code here
+        Scanner scanner = new Scanner(System.in);
+        String s = scanner.next();
+
+        int maxLength = lengthOfLongestSubstringTwoDistinct(s);
+        System.out.println(maxLength);
+    }
+
+    public static int lengthOfLongestSubstringTwoDistinct(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+
+        Map<Character, Integer> map = new HashMap<>();
+        int left = 0;
+        int right = 0;
+        int maxLength = 0;
+
+        while (right < s.length()) {
+            char current = s.charAt(right);
+            map.put(current, map.getOrDefault(current, 0) + 1);
+
+            while (map.size() > 2) {
+                char leftChar = s.charAt(left);
+                map.put(leftChar, map.get(leftChar) - 1);
+                if (map.get(leftChar) == 0) {
+                    map.remove(leftChar);
+                }
+                left++;
+            }
+
+            maxLength = Math.max(maxLength, right - left + 1);
+            right++;
+        }
+
+        return maxLength;
+    }
+}
