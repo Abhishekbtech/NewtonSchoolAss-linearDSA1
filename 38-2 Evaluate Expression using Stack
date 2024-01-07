@@ -1,0 +1,72 @@
+import java.io.*; // for handling input/output
+import java.util.*; // contains Collections framework
+
+// don't change the name of this class
+// you can add inner classes if needed
+class Main {
+    public static void main (String[] args) {
+        // Your code here
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        scanner.nextLine();
+        String expression = scanner.nextLine();
+
+        int result = evaluatePostfix(expression);
+        System.out.println(result);
+    }
+
+    static int evaluatePostfix(String exp){
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < exp.length(); i++) {
+            char c = exp.charAt(i);
+ 
+            if (c == ' '){
+                continue;
+            } else if (Character.isDigit(c)) {
+                int n = 0;
+                while (Character.isDigit(c)) {
+                    n = n * 10 + (int)(c - '0');
+                    i++;
+                    if (i < exp.length()) {
+                        c = exp.charAt(i);
+                    } else {
+                        break;
+                    }
+                }
+                i--;
+                stack.push(n);
+            } else {
+                if (stack.isEmpty()) {
+                    return Integer.MIN_VALUE;
+                }
+                int val1 = stack.pop();
+                
+                if (stack.isEmpty()) {
+                    return Integer.MIN_VALUE;
+                }
+                int val2 = stack.pop();
+ 
+                switch (c) {
+                    case '+':
+                        stack.push(val2 + val1);
+                        break;
+                    case '-':
+                        stack.push(val2 - val1);
+                        break;
+                    case '/':
+                        stack.push(val2 / val1);
+                        break;
+                    case '*':
+                        stack.push(val2 * val1);
+                        break;
+                }
+            }
+        }
+        
+        if (stack.isEmpty() || stack.size() > 1) {
+            return Integer.MIN_VALUE;
+        }
+        
+        return stack.pop();
+    }
+}
