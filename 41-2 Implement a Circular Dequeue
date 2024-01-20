@@ -1,0 +1,100 @@
+import java.io.*; // for handling input/output
+import java.util.*; // contains Collections framework
+
+// don't change the name of this class
+// you can add inner classes if needed
+class CircularDequeue {
+    private int[] deque;
+    private int front, rear, size, count;
+
+    public CircularDequeue(int n) {
+        size = n;
+        deque = new int[size];
+        front = -1;
+        rear = -1;
+        count = 0;
+    }
+
+    public boolean pushFront(int value) {
+        if (count == size)
+            return false;
+
+        if (front == -1) {
+            front = 0;
+            rear = 0;
+        } else {
+            front = (front - 1 + size) % size;
+        }
+
+        deque[front] = value;
+        count++;
+        return true;
+    }
+
+    public boolean pushRear(int value) {
+        if (count == size)
+            return false;
+
+        if (rear == -1) {
+            front = 0;
+            rear = 0;
+        } else {
+            rear = (rear + 1) % size;
+        }
+
+        deque[rear] = value;
+        count++;
+        return true;
+    }
+
+    public int popFront() {
+        if (count == 0)
+            return -1;
+
+        int poppedValue = deque[front];
+        front = (front + 1) % size;
+        count--;
+        return poppedValue;
+    }
+
+    public int popRear() {
+        if (count == 0)
+            return -1;
+
+        int poppedValue = deque[rear];
+        rear = (rear - 1 + size) % size;
+        count--;
+        return poppedValue;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int n = scanner.nextInt();
+        int q = scanner.nextInt();
+
+        CircularDequeue circularDequeue = new CircularDequeue(n);
+
+        for (int i = 0; i < q; i++) {
+            int type = scanner.nextInt();
+
+            if (type == 1) {
+                int position = scanner.nextInt();
+                int element = scanner.nextInt();
+                if (position == 1) {
+                    System.out.println(circularDequeue.pushFront(element));
+                } else {
+                    System.out.println(circularDequeue.pushRear(element));
+                }
+            } else if (type == 2) {
+                int position = scanner.nextInt();
+                int poppedElement = (position == 1) ? circularDequeue.popFront() : circularDequeue.popRear();
+                System.out.println(poppedElement);
+            }
+        }
+
+        scanner.close();
+    }
+}
